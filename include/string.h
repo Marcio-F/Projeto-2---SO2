@@ -3,6 +3,7 @@
 
 #include "types.h"
 
+// Essa função retorna o tamanho de uma string
 uint16 strlength(string ch) {
     uint16 i = 1;
     while(ch[i++]);

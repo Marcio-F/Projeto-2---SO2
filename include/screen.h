@@ -28,6 +28,11 @@ extern void updateCursor() {
     outportb(0x3D5, temp);
 }
 
+/*
+    A função clearScreen() limpa a tela ao ir limpando linha por linha utilizando a 
+    função clearLine(), e ao final retorna o cursor para a posição (0, 0) e então
+    atualiza o cursor com a função clearScreen().
+*/
 extern void clearScreen() {
     clearLine(0,sh-1);
     cursorX = 0;
@@ -35,6 +40,10 @@ extern void clearScreen() {
     updateCursor();
 }
 
+/*
+    A função scrollUp() recebe um número de linhas que serão deslocadas para cima
+    e então copia o conteúdo da tela para cima e limpa a última linha da tela.
+*/
 extern void scrollUp(uint8 lineNumber) {
     string vidmem = (string) 0xb8000;
     uint16 i = 0;
@@ -55,12 +64,22 @@ extern void scrollUp(uint8 lineNumber) {
     updateCursor();
 }
 
+/*
+    A função newLineCheck() verifica se o cursor está na última linha da tela, se
+    estiver, então a função scrollUp() é chamada para deslocar a tela para cima.
+*/
 extern void newLineCheck() {
     if(cursorY >= sh-1) {
         scrollUp(1);
     }
 }
 
+/*
+    A função printch() recebe um caractere e então verifica se o caractere é um
+    caractere especial, se for, então a função trata o caractere de acordo com
+    o seu valor, se não for, então o caractere é impresso na tela e o cursor é
+    atualizado.
+*/
 extern void printch(char c) {
     string vidmem = (string) 0xb8000;
 
@@ -97,6 +116,10 @@ extern void printch(char c) {
     updateCursor();
 }
 
+/*
+    A função print() recebe uma string e então imprime cada caractere da string
+    na tela utilizando a função printch().
+*/
 extern void print(string ch) {
     uint16 i = 0;
 

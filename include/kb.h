@@ -80,6 +80,7 @@ string readStr()
                     break;
                 case 0x0E:
                     printch('\b');
+                    i--;
                     break;
                 case 0x0F:
                     printch('\t');
@@ -137,13 +138,13 @@ string readStr()
                     i++;
                     break;
                 case 0x1A:
-                    printch('[');
-                    buffstr[i] = '[';
+                    printch('´');
+                    buffstr[i] = '´';
                     i++;
                     break;
                 case 0x1B:
-                    printch(']');
-                    buffstr[i] = ']';
+                    printch('[');
+                    buffstr[i] = '[';
                     i++;
                     break;
                 case 0x1C:
@@ -205,13 +206,13 @@ string readStr()
                     i++;
                     break;
                 case 0x27:
-                    printch(';');
-                    buffstr[i] = ';';
+                    printch('ç');
+                    buffstr[i] = 'ç';
                     i++;
                     break;
                 case 0x28:  
-                    printch('\'');
-                    buffstr[i] = '\'';
+                    printch('~');
+                    buffstr[i] = '~';
                     i++;
                     break;
                 case 0x29:  
@@ -227,8 +228,8 @@ string readStr()
                     break;
                 */
                 case 0x2B:
-                    printch('\\');
-                    buffstr[i] = '\\';
+                    printch(']');
+                    buffstr[i] = ']';
                     i++;
                     break;
                 case 0x2C:
@@ -277,8 +278,8 @@ string readStr()
                     i++;
                     break;
                 case 0x35:
-                    printch('/');
-                    buffstr[i] = '/';
+                    printch(';');
+                    buffstr[i] = ';';
                     i++;
                     break;
                 /*

@@ -5,7 +5,7 @@
 #include "system.h"
 #include "string.h"
 
-int32 cursorX = 20, cursorY = 15;
+int32 cursorX = 0, cursorY = 0;
 const uint8 sw = 80, sh = 25, sd = 2;
 
 extern void clearLine(uint8 from, uint8 to) {
@@ -122,8 +122,9 @@ extern void printch(char c) {
 */
 extern void print(string ch) {
     uint16 i = 0;
+    uint8 length = strlength(ch);
 
-    for(i; i < strlength(ch); i++) {
+    for(i; i < length; i++) {
         printch(ch[i]);
     }
 }

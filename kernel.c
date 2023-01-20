@@ -1,13 +1,31 @@
 #include "include/screen.h"
+#include "include/kb.h"
+#include "include/string.h"
 
 kmain() {
-    char *vidmem = (char*) 0xb8000;
-    // vidmem[0] = 'M';
-    // vidmem[1] = 0x02; /* cor do caracter: verde */
-
     clearScreen();
-    updateCursor();
-    print("\t\t\t\t    SimpleSO");
+
+    print("\t\t\t\t    SimpleOS");
     print("\n\n");
-    print("\rHello World!");
+
+    while (1) {
+        print("SimpleOS> ");
+
+        string input = readStr();
+
+        if (strEql(input, "clear\r") || strEql(input, "cls\r")) {
+            clearScreen();
+        } else if (strEql(input, "exit\r")) {
+            print("\n\nExiting...\n");
+            break;
+        } else if (strEql(input, "\r")) {
+            print(input);
+        } else {
+            print("\nUnknown command: ");
+            print(input);
+            print("\n");
+        }
+
+        print("\n");
+    }
 }

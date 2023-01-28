@@ -2,14 +2,15 @@
 
 int32 cursorX = 0, cursorY = 0;
 const uint8 sw = 80, sh = 25, sd = 2;
+int color = 0x0F;
 
 extern void clearLine(uint8 from, uint8 to) {
     uint16 i = sw * from * sd;
     string vidmem = (string) 0xb8000;
 
-    for (i; i < (sw * (to + 1) * sd); i++) {
-        vidmem[i] = 0x0;
-        vidmem[i+1] = 0x0F;
+    for (i; i < (sw * to * sd); i++) {
+        vidmem[(i/2)*2+1] = color;
+        vidmem[(i/2)*2] = 0;
     }
 }
 
@@ -99,7 +100,7 @@ extern void printch(char c) {
             break;
         default:
             vidmem[((cursorY * sw + cursorX)) * sd] = c;
-            vidmem[((cursorY * sw + cursorX)) * sd + 1] = 0x0F;
+            vidmem[((cursorY * sw + cursorX)) * sd + 1] = color;
             cursorX++;
             break;
     }
@@ -124,4 +125,20 @@ extern void print(string ch) {
     for(i; i < length; i++) {
         printch(ch[i]);
     }
+}
+
+void set_screen_color(int text_color, int bg_color) {
+    color = (bg_color << 4) | text_color;
+}
+
+void set_screen_color_from_color_code(int color_code) {
+    color = color_code;
+}
+
+void print_colored(string ch, int text_color, int bg_color) {
+    int current_color = color;
+    
+    set_screen_color(text_color, bg_color);
+    print(ch);
+    set_screen_color_from_color_code(current_color);
 }

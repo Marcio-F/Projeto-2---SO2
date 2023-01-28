@@ -7,8 +7,8 @@ LDFLAGS = -m elf_i386 -T src/link.ld
 EMULATOR = qemu-system-i386
 EMULATOR_FLAGS = --kernel
 
-SRCS = src/kernel.asm src/kernel.c src/idt.c src/isr.c src/kb.c src/screen.c src/string.c src/system.c src/util.c
-OBJS = obj/kasm.o obj/kc.o obj/idt.o obj/isr.o obj/kb.o obj/screen.o obj/string.o obj/system.o obj/util.o
+SRCS = src/kernel.asm src/kernel.c src/idt.c src/isr.c src/kb.c src/screen.c src/string.c src/system.c src/util.c src/shell.c
+OBJS = obj/kasm.o obj/kc.o obj/idt.o obj/isr.o obj/kb.o obj/screen.o obj/string.o obj/system.o obj/util.o obj/shell.o
 OUTPUT = SimpleOS/boot/kernel.bin
 
 run: link 
@@ -51,12 +51,13 @@ obj/system.o: src/system.c
 obj/util.o: src/util.c
 	$(COMPILER) $(CFLAGS) src/util.c -o obj/util.o
 
+obj/shell.o: src/shell.c
+	$(COMPILER) $(CFLAGS) src/shell.c -o obj/shell.o
+
 build:
 # sudo apt install xorriso
 	rm SimpleOS/boot/grub/ -rf
-	mkdir SimpleOS/
-	mkdir SimpleOS/boot/
-	mkdir SimpleOS/boot/grub/
+	mkdir -p SimpleOS/boot/grub/
 	echo set default=0 >> SimpleOS/boot/grub/grub.cfg
 	echo set timeout=0 >> SimpleOS/boot/grub/grub.cfg
 	echo menuentry "SimpleOS" { >> SimpleOS/boot/grub/grub.cfg
@@ -70,5 +71,5 @@ all: run build
 clean:
 	rm -rf obj/
 	rm -rf SimpleOS/
-	rm release/SimpleOS.iso
+	rm -f release/SimpleOS.iso
 	

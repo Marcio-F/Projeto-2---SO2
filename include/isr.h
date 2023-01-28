@@ -2,6 +2,7 @@
 #define ISR_H
 
 #include "types.h"
+#include "screen.h"
 
 void isr0();
 void isr1();

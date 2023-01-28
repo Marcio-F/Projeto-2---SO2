@@ -74,8 +74,10 @@ string readStr()
                     i++;
                     break;
                 case 0x0E:
-                    printch('\b');
-                    i--;
+                    if (i > 0) {
+                        printch('\b');
+                        i--;
+                    }
                     break;
                 case 0x0F:
                     printch('\t');
@@ -143,13 +145,11 @@ string readStr()
                     i++;
                     break;
                 case 0x1C:
-                    printch('\r');
-                    buffstr[i] = '\r';
-                    i++;
+                    if (i == 0) buffstr = '\0';
                     reading = 0;
                     break;
                 /*
-                case 0x1D: Left ctrl
+                case 0x1D: // Left ctrl
                     printch('l');
                     buffstr[i] = 'l';
                     i++;
@@ -216,7 +216,7 @@ string readStr()
                     i++;
                     break;
                 /*
-                case 0x2A: Left shift
+                case 0x2A: // Left shift
                     printch('l');
                     buffstr[i] = 'l';
                     i++;
@@ -305,5 +305,6 @@ string readStr()
         }
     }
     buffstr[i] = 0;
+    
     return buffstr;
 }

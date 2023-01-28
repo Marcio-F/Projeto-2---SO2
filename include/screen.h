@@ -7,6 +7,7 @@
 
 extern int32 cursorX, cursorY;
 extern const uint8 sw, sh, sd;
+extern int color;
 
 extern void clearLine(uint8 from, uint8 to);
 
@@ -44,5 +45,12 @@ extern void printch(char c);
     na tela utilizando a função printch().
 */
 extern void print(string ch);
+
+extern void set_screen_color(int text_color, int bg_color);
+
+extern void set_screen_color_from_color_code(int color_code);
+
+extern void print_colored(string ch, int text_color, int bg_color);
+
 
 #endif

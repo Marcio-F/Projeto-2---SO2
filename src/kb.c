@@ -135,8 +135,8 @@ string readStr()
                     i++;
                     break;
                 case 0x1A:
-                    printch('´');
-                    buffstr[i] = '´';
+                    printch((char) 49844);
+                    buffstr[i] = (char) 49844;
                     i++;
                     break;
                 case 0x1B:
@@ -201,8 +201,8 @@ string readStr()
                     i++;
                     break;
                 case 0x27:
-                    printch('ç');
-                    buffstr[i] = 'ç';
+                    printch((char) 50087);
+                    buffstr[i] = (char) 50087;
                     i++;
                     break;
                 case 0x28:  

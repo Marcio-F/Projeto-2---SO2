@@ -13,7 +13,7 @@ void launch_shell(int n) {
         ch = readStr(); // memory_copy(readStr(), ch, 100);
 
         if(strEql(ch, "cmd")) {
-            print("\nVoce ja esta no cmd. Novo shell recursivo aberto\n\n");
+            print("\nVoce ja esta no cmd. Novo shell recursivo aberto...\n\n");
             launch_shell(n+1);
         }
         else if (strEql(ch, '\0'));
